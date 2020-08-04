@@ -5,3 +5,5 @@
 /.vs
 /FilterByConfigurableRules/obj
 /FilterByConfigurableRules/bin
+/Engine/obj
+/Engine/bin
