@@ -10,7 +10,6 @@ namespace Engine
     public class SelectionEngine
     {
         private const string PARAMETER_NAME = "x";
-        private const string METHOD_NAME = "Select";
 
         private readonly Dictionary<StringConversionType, string> StringConversionTypeMap = new Dictionary<StringConversionType, string>
         {
@@ -20,8 +19,6 @@ namespace Engine
 
         public TOut[] Select<TIn, TOut>(IEnumerable<TIn> data, IEnumerable<SelectionMapping> mappings)
         {
-            var queryable = data.AsQueryable();
-
             var parameterExpression = CreateParameter(typeof(TIn), PARAMETER_NAME);
 
             var newExpression = Expression.New(typeof(TOut));
@@ -32,17 +29,9 @@ namespace Engine
 
             var lambda = Expression.Lambda<Func<TIn, TOut>>(memberInitExpression, parameterExpression);
 
-            var select = Expression.Call(
-                typeof(Queryable),
-                METHOD_NAME,
-                new Type[] { typeof(TIn), typeof(TOut) },
-                queryable.Expression,
-                lambda
-            );
+            var select = lambda.Compile();
 
-            var query = queryable.Provider.CreateQuery<TOut>(select);
-
-            return query.ToArray();
+            return data.Select(select).ToArray();
         }
 
         private ParameterExpression CreateParameter(Type type, string parameterName)

@@ -10,7 +10,6 @@ namespace Engine
     public class FilteringEngine
     {
         private const string PARAMETER_NAME = "x";
-        private const string METHOD_NAME = "Where";
 
         private readonly Dictionary<ComparisonType, ExpressionType> ComparisonTypeMap = new Dictionary<ComparisonType, ExpressionType>
         {
@@ -29,25 +28,15 @@ namespace Engine
 
         public T[] Filter<T>(IEnumerable<T> data, ConditionGroup group)
         {
-            var queryable = data.AsQueryable();
-
             var parameterExpression = CreateParameter(typeof(T), PARAMETER_NAME);
 
             var expression = BuildExpression(parameterExpression, group);
 
             var lambda = Expression.Lambda<Func<T, bool>>(expression, parameterExpression);
 
-            var where = Expression.Call(
-                typeof(Queryable),
-                METHOD_NAME,
-                new Type[] { typeof(T) },
-                queryable.Expression,
-                lambda
-            );
+            var where = lambda.Compile();
 
-            var query = queryable.Provider.CreateQuery<T>(where);
-
-            return query.ToArray();
+            return data.Where(where).ToArray();
         }
 
         private ParameterExpression CreateParameter(Type type, string parameterName)
