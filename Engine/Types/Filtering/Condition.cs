@@ -1,6 +1,6 @@
-﻿using Engine.Enums;
+﻿using Engine.Enums.Filtering;
 
-namespace Engine.Types
+namespace Engine.Types.Filtering
 {
     public class Condition
     {

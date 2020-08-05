@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Engine.Enums;
-using Engine.Types;
+using Engine.Enums.Filtering;
+using Engine.Types.Filtering;
 
 namespace Engine
 {

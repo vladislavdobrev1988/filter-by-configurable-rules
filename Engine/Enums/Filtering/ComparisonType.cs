@@ -1,4 +1,4 @@
-﻿namespace Engine.Enums
+﻿namespace Engine.Enums.Filtering
 {
     public enum ComparisonType
     {
