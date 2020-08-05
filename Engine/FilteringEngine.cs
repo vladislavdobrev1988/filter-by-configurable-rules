@@ -35,12 +35,14 @@ namespace Engine
 
             var expression = BuildExpression(parameterExpression, group);
 
+            var lambda = Expression.Lambda<Func<T, bool>>(expression, parameterExpression);
+
             var where = Expression.Call(
                 typeof(Queryable),
                 METHOD_NAME,
-                new Type[] { queryable.ElementType },
+                new Type[] { typeof(T) },
                 queryable.Expression,
-                Expression.Lambda<Func<T, bool>>(expression, parameterExpression)
+                lambda
             );
 
             var query = queryable.Provider.CreateQuery<T>(where);
