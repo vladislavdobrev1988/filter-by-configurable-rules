@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Engine;
 using Engine.Types.Filtering;
 using Engine.Types.Selection;
@@ -10,14 +11,16 @@ namespace FilterByConfigurableRules
 {
     class Program
     {
-        private const string DATA_DIR = @"C:\Code\filter-by-configurable-rules\FilterByConfigurableRules\Data";
+        private const string DATA_FOLDER = "Data";
+
+        private static readonly string RootDir = Path.Combine(Environment.CurrentDirectory.Split(Path.DirectorySeparatorChar).SkipLast(3).ToArray());
 
         static void Main(string[] args)
         {
             var data = GetDataSource();
             var conditions = GetConditions();
             var mappings = GetMappings();
-            
+
             var filteringEngine = new FilteringEngine();
 
             var filtered = filteringEngine.Filter(data, conditions);
@@ -33,7 +36,7 @@ namespace FilterByConfigurableRules
 
         private static string ReadTextFile(string filename)
         {
-            var path = Path.Combine(DATA_DIR, filename);
+            var path = Path.Combine(RootDir, DATA_FOLDER, filename);
 
             return File.ReadAllText(path);
         }
