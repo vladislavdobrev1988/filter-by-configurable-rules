@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Engine;
 using Engine.Types.Filtering;
 using Engine.Types.Selection;
@@ -11,9 +10,8 @@ namespace FilterByConfigurableRules
 {
     class Program
     {
+        private const string BIN_FOLDER = "bin";
         private const string DATA_FOLDER = "Data";
-
-        private static readonly string RootDir = Path.Combine(Environment.CurrentDirectory.Split(Path.DirectorySeparatorChar).SkipLast(3).ToArray());
 
         static void Main(string[] args)
         {
@@ -34,9 +32,18 @@ namespace FilterByConfigurableRules
             PrintCollection(selection, "Selected:");
         }
 
+        private static string GetRootPath()
+        {
+            var path = typeof(Program).Assembly.Location;
+
+            var index = path.LastIndexOf(BIN_FOLDER);
+
+            return path.Substring(0, index);
+        }
+
         private static string ReadTextFile(string filename)
         {
-            var path = Path.Combine(RootDir, DATA_FOLDER, filename);
+            var path = Path.Combine(GetRootPath(), DATA_FOLDER, filename);
 
             return File.ReadAllText(path);
         }
