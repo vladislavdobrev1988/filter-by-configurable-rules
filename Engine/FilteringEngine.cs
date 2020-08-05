@@ -83,13 +83,13 @@ namespace Engine
                 return CreateConditionExpression(parameterExpression, group.Condition);
             }
 
-            var expression = BuildExpression(parameterExpression, group.Conditions.ElementAt(0));
+            var expression = BuildExpression(parameterExpression, group.Conditions[0]);
 
             var merge = ConditionGroupTypeMap[group.ConditionType.Value];
 
-            for (int i = 1; i < group.Conditions.Count(); i++)
+            for (int i = 1; i < group.Conditions.Length; i++)
             {
-                expression = merge(expression, BuildExpression(parameterExpression, group.Conditions.ElementAt(i)));
+                expression = merge(expression, BuildExpression(parameterExpression, group.Conditions[i]));
             }
 
             return expression;

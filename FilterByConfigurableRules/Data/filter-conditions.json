@@ -40,7 +40,7 @@
                 {
                     "Condition": {
                         "Property": "Age",
-                        "Value": 25,
+                        "Value": 30,
                         "ComparisonType": "LessThanOrEqual"
                     }
                 }
