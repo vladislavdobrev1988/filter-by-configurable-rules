@@ -71,7 +71,9 @@ namespace Engine
 
             var constantExpression = CreateConstant(condition);
 
-            return Expression.MakeBinary(ComparisonTypeMap[condition.ComparisonType], propertyExpression, constantExpression);
+            var convertExpression = Expression.ConvertChecked(constantExpression, propertyExpression.Type);
+
+            return Expression.MakeBinary(ComparisonTypeMap[condition.ComparisonType], propertyExpression, convertExpression);
         }
 
         private BinaryExpression BuildExpression(ParameterExpression parameterExpression, ConditionGroup group)

@@ -1,0 +1,12 @@
+[
+    {
+        "InputProperty": "Name",
+        "OutputProperty": "NameConverted",
+        "StringConversionType": "Uppercase"
+    },
+    {
+        "InputProperty": "Age",
+        "OutputProperty": "Age",
+        "StringConversionType": null
+    }
+]

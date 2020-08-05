@@ -1,0 +1,50 @@
+{
+    "ConditionType": "And",
+    "Conditions": [
+        {
+            "ConditionType": "Or",
+            "Conditions": [
+                {
+                    "Condition": {
+                        "Property": "Name",
+                        "Value": "Peter",
+                        "ComparisonType": "Equal"
+                    }
+                },
+                {
+                    "Condition": {
+                        "Property": "Name",
+                        "Value": "Molly",
+                        "ComparisonType": "Equal"
+                    }
+                },
+                {
+                    "Condition": {
+                        "Property": "Name",
+                        "Value": "Alex",
+                        "ComparisonType": "Equal"
+                    }
+                }
+            ]
+        },
+        {
+            "ConditionType": "And",
+            "Conditions": [
+                {
+                    "Condition": {
+                        "Property": "Age",
+                        "Value": 20,
+                        "ComparisonType": "GreaterThanOrEqual"
+                    }
+                },
+                {
+                    "Condition": {
+                        "Property": "Age",
+                        "Value": 25,
+                        "ComparisonType": "LessThanOrEqual"
+                    }
+                }
+            ]
+        }
+    ]
+}
